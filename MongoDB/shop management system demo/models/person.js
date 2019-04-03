@@ -38,7 +38,7 @@ const personSchema = mongoose.Schema({
 
   address: {
     type: addressSchema,
-    require: true
+    required: true
   },
 
   phone: {

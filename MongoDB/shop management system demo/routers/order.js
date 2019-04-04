@@ -1,4 +1,5 @@
 const express = require("express");
+const Product = require("../models/product")
 const {
     Order,
     validateOrder
@@ -21,10 +22,17 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const orders = await Order.find().populate(
-            "customer person product"
+        const orders = await Order.find().populate({
+                path: "customer",
+                populate: {
+                    path: "person"
+                }
+            }
 
-        );
+        ).populate({
+            path: "orderProductList.product",
+            model: "Product"
+        })
 
         return res.status(200).send(orders);
     } catch (err) {

@@ -30,7 +30,12 @@ function validateSupplier(supplier) {
       .required()
   };
 
-  return Joi.validate(supplier, schema);
+  return Joi.validate(supplier, schema, {
+    abortEarly: false
+  });
 }
 
-module.exports = { Supplier, validateSupplier };
+module.exports = {
+  Supplier,
+  validateSupplier
+};
